@@ -118,6 +118,10 @@ section {
   padding: 0 30px;
 }
 
+section img {
+  max-width: 100%;
+}
+
 .variation {
   display: none
 }
