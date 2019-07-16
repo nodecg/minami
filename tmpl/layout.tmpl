@@ -17,6 +17,7 @@
     <?js if (env.conf.templates.github.url) { ?>
     <link type="text/css" rel="stylesheet" href="styles/github-corner.css">
     <?js } ?>
+    <link type="text/css" rel="stylesheet" href="styles/version-picker.css">
 </head>
 <body>
 <?js if (env.conf.templates.github.url) { ?>
@@ -28,6 +29,18 @@
     </svg>
 </a>
 <?js } ?>
+
+<div class="versions" data-toggle="versions">
+    <span class="current-version" data-toggle="current-version">
+        <span id="current-version"></span>
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="other-versions">
+        <h4>All versions</h4>
+        <ul id="versions-list">
+        </ul>
+    </div>
+</div>
 
 <input type="checkbox" id="nav-trigger" class="nav-trigger" />
 <label for="nav-trigger" class="navicon-button x">
@@ -57,5 +70,6 @@
 <script>prettyPrint();</script>
 <script src="scripts/linenumber.js"></script>
 <script src="scripts/currentpage.js"></script>
+<script src="scripts/versionpicker.js"></script>
 </body>
 </html>
