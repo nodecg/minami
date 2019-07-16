@@ -1,5 +1,5 @@
 // Current Version stuff
-const currentVersion = window.location.pathname.replace(/\//g, '');
+const currentVersion = window.location.pathname.split('/')[1];
 
 const currentVersionEl = document.getElementById('current-version');
 currentVersionEl.textContent = 'Current Version: ' + currentVersion;
