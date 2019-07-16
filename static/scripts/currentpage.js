@@ -2,7 +2,7 @@ let currentPage, linkDestination;
 const currentClassName = 'is-current';
 const navLinks = document.querySelectorAll('nav li a');
 
-let styleCurrentPageLink = (pathname, hash) => {
+let styleCurrentPageLink = function (pathname, hash) {
     currentPage = `${pathname}${hash || ''}`.trim();
     for (let link of navLinks) {
         linkDestination = `${link.pathname}${link.hash || ''}`.trim();
