@@ -14,39 +14,32 @@ popoutButton.onclick = function() {
 // Version list population
 const versionContainer = document.getElementById('versions-list');
 
-var request = new XMLHttpRequest();
-request.open('GET', '/versions.json', true);
-
-request.onload = function() {
-  if (request.status >= 200 && request.status < 400) {
-    // Success!
-	var versions = JSON.parse(request.responseText);
-	
-	versions.forEach(function (version) {
-		var el = document.createElement('li');
-		var link = document.createElement('a');
-		
-		link.textContent = version.tag;
-		el.appendChild(link);
-		
-		el.classList.add('version');
-		link.setAttribute('href', '/' + version.versionName);
-		
-		if (version.versionName == currentVersion) {
-			link.classList.add('current');
+fetch('/versions.json')
+	.then(response => {
+		if (response.status !== 200) {
+			console.log('Failed to fetch version list. Status code: ' + response.status);
+			return;
 		}
-		
-		versionContainer.appendChild(el);
+
+		response.json().then(versions => {
+			versions.forEach(version => {
+				var el = document.createElement('li');
+				var link = document.createElement('a');
+				
+				link.textContent = version.tag;
+				el.appendChild(link);
+				
+				el.classList.add('version');
+				link.setAttribute('href', '/' + version.versionName);
+				
+				if (version.versionName == currentVersion) {
+					link.classList.add('current');
+				}
+				
+				versionContainer.appendChild(el);
+			});
+		});
+	})
+	.catch(err => {
+		console.log('Failed to fetch version list. Error: %s', err);
 	});
-
-  } else {
-    // We reached our target server, but it returned an error
-
-  }
-};
-
-request.onerror = function() {
-  // There was a connection error of some sort
-};
-
-request.send();
